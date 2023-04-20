@@ -36,13 +36,57 @@ class Flag
     h = flagHeight;
   }
   
+  int stripeCount = 6;
   void display()
   {
     fill(255, 255, 255);
     rect(x, y, w, h); // Main flag rect
-    fill(red);
+    /*fill(red);
     rect(x, y, w, h/6);
     fill(yellow);
-    rect(x, y + h / 6, w, h/6);
+    rect(x, y + h / 6, w, h/6);*/
+    for (int i = 0; i < stripeCount; i++)
+    {
+      switch(i)
+      {
+        case 0:
+        {
+          fill(red);
+          break;
+        }
+        case 1:
+        {
+          fill(yellow);
+          break;
+        }
+        case 2:
+        {
+          fill(green);
+          break;
+        }
+        case 3:
+        {
+          fill(lightblue);
+          break;
+        }
+        case 4:
+        {
+          fill(blue);
+          break;
+        }
+        case 5:
+        {
+          fill(purple);
+          break;
+        }
+        default:
+        {
+          break;
+        }
+      }
+      rect(x, y + (i * h/stripeCount), w, h/stripeCount);
+    }
+    
+    
   }
 }
