@@ -1,4 +1,5 @@
 Flag flag1, flag2, flag3, flag4, flag5;
+
 color red = color(255, 0, 0);
 color yellow = color(255, 247, 0);
 color green = color(0, 255, 0);
@@ -10,6 +11,8 @@ color brown = color(110, 64, 1);
 color pink = color(254, 191, 255);
 color violet = color(115, 0, 117);
 
+float xdir, ydir, wchange, hchange;
+
 void setup()
 {
   //size(1920, 1080);
@@ -17,14 +20,21 @@ void setup()
   background(240);
   colorMode(RGB);
   noStroke();
-  //Rects format = (xpos, ypos, width, height)
+  //Rects format = (xpos, ypos, width, height) Use 16:9 width-height ratio
   flag1 = new Flag(0, 0, 200, 100);
   flag2 = new Flag(100, 600, 250, 75);
   flag3 = new Flag(300, 300, 900, 600);
+  
+  xdir = random(-5, 5);
+  ydir = random(-5, 5);
+  wchange = 16;
+  hchange = 9;
 }
 
 void draw()
 {
+  background(240);
+  
   flag1.display();
   flag2.display();
   flag3.display();
@@ -95,6 +105,7 @@ class Flag
     //Triangles format = x1, y1, x2, y2, x3, y3
     /*fill(black);
     triangle(x, y, x, y + h, x + w/2, y + h/2);*/
+
     for (int i = 0; i < triangleCount; i++)
     {
       switch(i)
@@ -124,7 +135,22 @@ class Flag
           break;
         }
       }
-      triangle(x, y + i * (h / triangleCount), x, y + h - i * (h / triangleCount), x + w / 2 - i * (triangleCount), y + h / 2);
+      triangle(x, y + (i * h / triangleCount), x, y + h - (i * h / triangleCount), x + w / 2 - i * (triangleCount), y + h / 2);
+    }
+    
+    x += xdir;
+    y += ydir;
+    //w += wchange;
+    //h += hchange;
+    
+    if (x > width - w || x < 0)
+    {
+      xdir = -xdir;
+    }
+    
+    if (y > height - h || y < 0)
+    {
+      ydir = -ydir;
     }
   }
 }
