@@ -25,8 +25,8 @@ void setup()
   flag2 = new Flag(100, 600, 250, 75);
   flag3 = new Flag(300, 300, 900, 600);
   
-  xdir = random(-5, 5);
-  ydir = random(-5, 5);
+  xdir = random(-2, 2);
+  ydir = random(-2, 2);
   wchange = 16;
   hchange = 9;
 }
@@ -38,6 +38,10 @@ void draw()
   flag1.display();
   flag2.display();
   flag3.display();
+  
+  //flag1.movement();
+  //flag2.movement();
+  //flag3.movement();
 }
 
 //Flag class which uses four parameters for rect
@@ -100,11 +104,11 @@ class Flag
       rect(x, y + (i * h/stripeCount), w, h/stripeCount);
     }
     
-    int triangleCount = 4;
+    float triangleCount = 4;
+    float segmentHeight = h / triangleCount / 4;
+    float segmentWidth = w / triangleCount;
     //Making the triangles
     //Triangles format = x1, y1, x2, y2, x3, y3
-    /*fill(black);
-    triangle(x, y, x, y + h, x + w/2, y + h/2);*/
 
     for (int i = 0; i < triangleCount; i++)
     {
@@ -135,9 +139,12 @@ class Flag
           break;
         }
       }
-      triangle(x, y + (i * h / triangleCount), x, y + h - (i * h / triangleCount), x + w / 2 - i * (triangleCount), y + h / 2);
+      triangle(x, y + (i * segmentHeight), x, y + h - (i * segmentHeight), x + w/2 - (i * segmentWidth / 4), y + h/2);
     }
-    
+  }
+  
+  /*void movement()
+  {
     x += xdir;
     y += ydir;
     //w += wchange;
@@ -152,5 +159,5 @@ class Flag
     {
       ydir = -ydir;
     }
-  }
+  }*/
 }
