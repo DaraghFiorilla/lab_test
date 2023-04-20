@@ -20,12 +20,14 @@ void setup()
   //Rects format = (xpos, ypos, width, height)
   flag1 = new Flag(0, 0, 200, 100);
   flag2 = new Flag(100, 600, 250, 75);
+  flag3 = new Flag(300, 300, 900, 600);
 }
 
 void draw()
 {
   flag1.display();
   flag2.display();
+  flag3.display();
 }
 
 //Flag class which uses four parameters for rect
@@ -88,9 +90,41 @@ class Flag
       rect(x, y + (i * h/stripeCount), w, h/stripeCount);
     }
     
+    int triangleCount = 4;
     //Making the triangles
     //Triangles format = x1, y1, x2, y2, x3, y3
-    fill(black);
-    triangle(x, y, x, y + h, x + w/2, y + h/2);
+    /*fill(black);
+    triangle(x, y, x, y + h, x + w/2, y + h/2);*/
+    for (int i = 0; i < triangleCount; i++)
+    {
+      switch(i)
+      {
+        case 0:
+        {
+          fill(black);
+          break;
+        }
+        case 1:
+        {
+          fill(brown);
+          break;
+        }
+        case 2:
+        {
+          fill(pink);
+          break;
+        }
+        case 3:
+        {
+          fill(yellow);
+          break;
+        }
+        default:
+        {
+          break;
+        }
+      }
+      triangle(x, y + i * (h / triangleCount), x, y + h - i * (h / triangleCount), x + w / 2 - i * (triangleCount), y + h / 2);
+    }
   }
 }
