@@ -3,8 +3,12 @@ color red = color(255, 0, 0);
 color yellow = color(255, 247, 0);
 color green = color(0, 255, 0);
 color lightblue = color(0, 251, 255);
-color blue = color (0, 0, 255);
-color purple = color (200, 0, 255);
+color blue = color(0, 0, 255);
+color purple = color(200, 0, 255);
+color black = color(0, 0, 0);
+color brown = color(110, 64, 1);
+color pink = color(254, 191, 255);
+color violet = color(115, 0, 117);
 
 void setup()
 {
@@ -41,10 +45,7 @@ class Flag
   {
     fill(255, 255, 255);
     rect(x, y, w, h); // Main flag rect
-    /*fill(red);
-    rect(x, y, w, h/6);
-    fill(yellow);
-    rect(x, y + h / 6, w, h/6);*/
+    //Making the stripes
     for (int i = 0; i < stripeCount; i++)
     {
       switch(i)
@@ -87,6 +88,9 @@ class Flag
       rect(x, y + (i * h/stripeCount), w, h/stripeCount);
     }
     
-    
+    //Making the triangles
+    //Triangles format = x1, y1, x2, y2, x3, y3
+    fill(black);
+    triangle(x, y, x, y + h, x + w/2, y + h/2);
   }
 }
