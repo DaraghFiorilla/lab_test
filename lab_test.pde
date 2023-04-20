@@ -11,7 +11,7 @@ color brown = color(110, 64, 1);
 color pink = color(254, 191, 255);
 color violet = color(115, 0, 117);
 
-float xdir, ydir, wchange, hchange;
+//float xdir, ydir, wchange, hchange;
 
 void setup()
 {
@@ -21,14 +21,11 @@ void setup()
   colorMode(RGB);
   noStroke();
   //Rects format = (xpos, ypos, width, height) Use 16:9 width-height ratio
-  flag1 = new Flag(0, 0, 200, 100);
-  flag2 = new Flag(100, 600, 250, 75);
-  flag3 = new Flag(300, 300, 900, 600);
-  
-  xdir = random(-2, 2);
-  ydir = random(-2, 2);
-  wchange = 16;
-  hchange = 9;
+  flag1 = new Flag(0, 0, 200, 100, random(-5, 5), random(-5, 5));
+  flag2 = new Flag(100, 600, 250, 75, random(-5, 5), random(-5, 5));
+  flag3 = new Flag(300, 300, 900, 600, random(-5, 5), random(-5, 5));
+  flag4 = new Flag(600, 420, 300, 90, random(-5, 5), random(-5, 5));
+  flag5 = new Flag(250, 900, 400, 125, random(-5, 5), random(-5, 5));
 }
 
 void draw()
@@ -38,23 +35,32 @@ void draw()
   flag1.display();
   flag2.display();
   flag3.display();
+  flag4.display();
+  flag5.display();
   
-  //flag1.movement();
-  //flag2.movement();
-  //flag3.movement();
+  flag1.movement();
+  flag2.movement();
+  flag3.movement();
+  flag4.movement();
+  flag5.movement();
 }
 
 //Flag class which uses four parameters for rect
 class Flag
 {
-  float x, y, w, h;
-  Flag(float xpos, float ypos, float flagWidth, float flagHeight)
+  float x, y, w, h, xdir, ydir;
+  Flag(float xpos, float ypos, float flagWidth, float flagHeight, float xdirection, float ydirection)
   {
     x = xpos;
     y = ypos;
     w = flagWidth;
     h = flagHeight;
+    xdir = xdirection;
+    ydir = ydirection;
   }
+  
+  float baseWidth = w;
+  float baseHeight = h;
   
   int stripeCount = 6;
   void display()
@@ -143,12 +149,10 @@ class Flag
     }
   }
   
-  /*void movement()
-  {
+  void movement()
+  {   
     x += xdir;
     y += ydir;
-    //w += wchange;
-    //h += hchange;
     
     if (x > width - w || x < 0)
     {
@@ -159,5 +163,5 @@ class Flag
     {
       ydir = -ydir;
     }
-  }*/
+  }
 }
